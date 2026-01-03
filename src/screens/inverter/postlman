@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "1f8b2a15-471b-41d3-b8ac-2c67019d14d3",
+		"name": "utl_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43979458",
+		"_collection_link": "https://prajjwal-339808.postman.co/workspace/Prajjwal's-Workspace~a911c235-0a28-4b50-8f9c-b1ec12fe41cd/collection/43979458-1f8b2a15-471b-41d3-b8ac-2c67019d14d3?action=share&source=collection_link&creator=43979458"
+	},
+	"item": [
+		{
+			"name": "inverter_data",
+			"item": [
+				{
+					"name": "Inverter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plantId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/log_invert",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"log_invert"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plant_data",
+			"item": [
+				{
+					"name": "Plant",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/plant",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"plant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/plant/?id=7",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"plant",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Hbeon\",\r\n    \"capacity\": 20,\r\n    \"last_update\": \"2025-04-30 05:25:34\",\r\n    \"creation_date\": \"2025-04-23\",\r\n    \"on_grid_status\": \"PV + Grid\",\r\n    \"location\": null,\r\n    \"address\": null,\r\n    \"plant_type\": null,\r\n    \"system_type\": null,\r\n    \"azimuth\": null,\r\n    \"tilt_angle\": null,\r\n    \"on_grid_date\": null,\r\n    \"contact_person\": null,\r\n    \"contact_number\": null,\r\n    \"business_name\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/plant",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"plant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"solar\",\r\n    \"capacity\": 5,\r\n    \"last_update\": \"--\",\r\n    \"creation_date\": \"2025-04-23\",\r\n    \"on_grid_status\": \"PV + Grid\",\r\n    \"location\": null,\r\n    \"address\": null,\r\n    \"plant_type\": null,\r\n    \"system_type\": null,\r\n    \"azimuth\": null,\r\n    \"tilt_angle\": null,\r\n    \"on_grid_date\": null,\r\n    \"contact_person\": null,\r\n    \"contact_number\": null,\r\n    \"business_name\": null,\r\n    \"solar_power\": \"--\",\r\n    \"power_normalized\": \"--\",\r\n    \"daily_production\": \"--\",\r\n    \"peak_hours_today\": \"--\",\r\n    \"plant_id\": \"--\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/plant/",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"plant",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "logger_data",
+			"item": [
+				{
+					"name": "Logger",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plantId\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/route?plantId=1",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"route"
+							],
+							"query": [
+								{
+									"key": "plantId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sno\" : \"&485519FE0FC416650180\",\r\n    \"plantId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/route/",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"route",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logger",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://122.180.144.196:3000/api/route?sno=2342342342234",
+							"protocol": "http",
+							"host": [
+								"122",
+								"180",
+								"144",
+								"196"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"route"
+							],
+							"query": [
+								{
+									"key": "sno",
+									"value": "2342342342234"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "charts",
+			"item": [
+				{
+					"name": "solar_power_per_plant",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04-15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/daily/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"daily",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/monthly/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"monthly",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/yearly/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"yearly",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/charts/solar_power_per_plant/total/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"total",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "solar_power_per_project",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04-15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/daily/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"daily",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/monthly/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"monthly",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/yearly/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"yearly",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plantId\" : 1,\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/api/charts/solar_power_per_plant/daily/",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant",
+												"daily",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "devices",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025-04-15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/charts/devices/daily/device_daily_chart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"daily",
+												"device_daily_chart"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025-04\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/charts/devices/monthly/device_month_chart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"monthly",
+												"device_month_chart"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/charts/devices/yearly/device_year_chart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"yearly",
+												"device_year_chart"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/charts/devices/total/device_total_chart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"total",
+												"device_total_chart"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "devices_project",
+			"item": [
+				{
+					"name": "devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/devices/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"devices",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

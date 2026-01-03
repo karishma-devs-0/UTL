@@ -1,0 +1,66 @@
+{
+  "expo": {
+    "name": "UTL SOLAR SUN +",
+    "slug": "ultsolarman",
+    "version": "1.1.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.jpg",
+    "splash": {
+      "image": "./src/assets/icon.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "We need access to your photos to let you upload plant images.",
+          "cameraPermission": "We need access to your camera to let you take plant photos."
+        }
+      ],
+      "@react-native-google-signin/google-signin"
+    ],
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "DUMMY_KEY_TO_SILENCE_ERRORS"
+        }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.karishma_bhatia.ultsolarman",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/icon.jpg",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "ios": {
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "We need access to photo library to upload plant images",
+        "NSCameraUsageDescription": "We need access to camera to take plant photos",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "ultSolarman"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e82ef2b9-58ea-4858-afb4-d0d22c33feb6"
+      },
+      "platformSupport": {
+        "android": true,
+        "ios": true
+      }
+    }
+  }
+}

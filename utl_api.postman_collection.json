@@ -1,0 +1,2085 @@
+{
+	"info": {
+		"_postman_id": "782bcab3-c743-4efd-ba72-ecf7bfe970c9",
+		"name": "utl_api",
+		"description": "ALL THE API'S WHICH ARE THERE IN APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47253418",
+		"_collection_link": "https://hbeondeveloper-1595925.postman.co/workspace/Software-Developer's-Workspace~db2ec73b-92ae-4aaf-81fa-a21b0d6c74b9/collection/47253418-782bcab3-c743-4efd-ba72-ecf7bfe970c9?action=share&source=collection_link&creator=47253418"
+	},
+	"item": [
+		{
+			"name": "inverter_data",
+			"item": [
+				{
+					"name": "Inverter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/log_invert/?plantId=1",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"log_invert",
+								""
+							],
+							"query": [
+								{
+									"key": "plantId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "shows live data of inverter setup in that plant"
+					},
+					"response": []
+				},
+				{
+					"name": "inverter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plantId\":1\r\n}"
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/log_invert/",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"log_invert",
+								""
+							]
+						},
+						"description": "adds new inverter inside plant_id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plant_data",
+			"item": [
+				{
+					"name": "Plant",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/plant",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plant"
+							]
+						},
+						"description": "shows details of every plant"
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/plant/?id=7",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plant",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						},
+						"description": "delete plants via plantId"
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"developer\",\r\n    \"capacity\": 20,\r\n    \"last_update\": \"2025-04-30 05:25:34\",\r\n    \"creation_date\": \"2025-04-23\",\r\n    \"on_grid_status\": \"PV + Grid\",\r\n    \"location\": null,\r\n    \"address\": null,\r\n    \"plant_type\": null,\r\n    \"system_type\": null,\r\n    \"azimuth\": null,\r\n    \"tilt_angle\": null,\r\n    \"on_grid_date\": null,\r\n    \"contact_person\": null,\r\n    \"contact_number\": null,\r\n    \"business_name\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/plant",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plant"
+							]
+						},
+						"description": "adds new plant"
+					},
+					"response": []
+				},
+				{
+					"name": "Plant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"solar\",\r\n    \"capacity\": 5,\r\n    \"last_update\": \"--\",\r\n    \"creation_date\": \"2025-04-23\",\r\n    \"on_grid_status\": \"PV + Grid\",\r\n    \"location\": null,\r\n    \"address\": null,\r\n    \"plant_type\": null,\r\n    \"system_type\": null,\r\n    \"azimuth\": null,\r\n    \"tilt_angle\": null,\r\n    \"on_grid_date\": null,\r\n    \"contact_person\": null,\r\n    \"contact_number\": null,\r\n    \"business_name\": null,\r\n    \"solar_power\": \"--\",\r\n    \"power_normalized\": \"--\",\r\n    \"daily_production\": \"--\",\r\n    \"peak_hours_today\": \"--\",\r\n    \"plant_id\": \"--\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/plant/",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plant",
+								""
+							]
+						},
+						"description": "edits the plant via plantId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "logger_data",
+			"item": [
+				{
+					"name": "Logger",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plantId\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/route?plantId=1",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"route"
+							],
+							"query": [
+								{
+									"key": "plantId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "shows detail logger of that plantId"
+					},
+					"response": []
+				},
+				{
+					"name": "Logger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sno\" : \"&485519FE0FC416650180\",\r\n    \"plantId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/route",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"route"
+							]
+						},
+						"description": "adds new logger inside plantId"
+					},
+					"response": []
+				},
+				{
+					"name": "Logger",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/route?sno=2342342342234",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"route"
+							],
+							"query": [
+								{
+									"key": "sno",
+									"value": "2342342342234"
+								}
+							]
+						},
+						"description": "deletes that logger of plantId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "charts",
+			"item": [
+				{
+					"name": "solar_power_per_plant_logs",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025-12-03\",\r\n    \"loggerSno\": \"84F3EB8D9EEA\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_plant_logs/daily/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant_logs",
+												"daily",
+												""
+											]
+										},
+										"description": "this api shows daily live data inside plant dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025-12\",\r\n    \"loggerSno\": \"84F3EB8D9EEA\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_plant_logs/monthly/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant_logs",
+												"monthly",
+												""
+											]
+										},
+										"description": "this api shows monthly live data inside plant dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025\",\r\n    \"loggerSno\": \"84F3EB8D9EEA\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_plant_logs/yearly/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant_logs",
+												"yearly",
+												""
+											]
+										},
+										"description": "this api shows yearly live data inside plant dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"loggerSno\": \"84F3EB8D9EEA\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_plant_logs/total/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_plant_logs",
+												"total",
+												""
+											]
+										},
+										"description": "this api shows total live data inside plant dashboard"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "solar_power_per_project",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04-15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_project/daily/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_project",
+												"daily",
+												""
+											]
+										},
+										"description": "this api shows daily live data inside main dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025-04\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_project/monthly/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_project",
+												"monthly",
+												""
+											]
+										},
+										"description": "this api shows monthly live data inside main dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plant_id\" : 1,\r\n    \"date_parameter\" : \"2025\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_project/yearly/",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_project",
+												"yearly",
+												""
+											]
+										},
+										"description": "this api shows yearly live data inside main dashboard"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"plantId\" : \"1\",\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/solar_power_per_project/total",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"solar_power_per_project",
+												"total"
+											]
+										},
+										"description": "this api shows total live data inside main dashboard"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "devices",
+					"item": [
+						{
+							"name": "daily",
+							"item": [
+								{
+									"name": "daily",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025-04-15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/devices/daily/device_daily_chart",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"daily",
+												"device_daily_chart"
+											]
+										},
+										"description": "this api shows daily live data inside devices"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monthly",
+							"item": [
+								{
+									"name": "monthly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025-04\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/devices/monthly/device_month_chart",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"monthly",
+												"device_month_chart"
+											]
+										},
+										"description": "this api shows monhtly live data inside devices"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "yearly",
+							"item": [
+								{
+									"name": "yearly",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\",\r\n    \"date_parameter\" : \"2025\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/devices/yearly/device_year_chart",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"yearly",
+												"device_year_chart"
+											]
+										},
+										"description": "this api shows yearly live data inside devices"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "total",
+							"item": [
+								{
+									"name": "total",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"device_sn\" : \"2209192592\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/charts/devices/total/device_total_chart",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"charts",
+												"devices",
+												"total",
+												"device_total_chart"
+											]
+										},
+										"description": "this api shows total live data inside devices"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "solar_power_per_plant",
+					"item": [
+						{
+							"name": "daily",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025-12-03\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/charts/solar_power_per_plant/daily",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"charts",
+										"solar_power_per_plant",
+										"daily"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "monthly",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025-12\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/charts/solar_power_per_plant/monthly",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"charts",
+										"solar_power_per_plant",
+										"monthly"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "yearly",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plant_id\" : 4518,\r\n    \"date_parameter\" : \"2025\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/charts/solar_power_per_plant/yearly/",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"charts",
+										"solar_power_per_plant",
+										"yearly",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "total",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plant_id\" : 4518\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/charts/solar_power_per_plant/total",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"charts",
+										"solar_power_per_plant",
+										"total"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "devices_project",
+			"item": [
+				{
+					"name": "devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/devices/",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								""
+							]
+						},
+						"description": "this api shows the details of all the loggers"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "http://localhost:3000/api/auth/login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-device-id",
+										"value": "hbeon_mobile",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"email\" : \"superadmin@solar.com\", \r\n    \"password\" : \"superadmin123\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/login",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								},
+								"description": "Login User"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"item": [
+						{
+							"name": "http://localhost:3000/api/auth/register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"Ishika\", \r\n    \"email\": \"Ishika@solar.com\", \r\n    \"password\": \"Ishika123\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/register",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								},
+								"description": "Register User"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Session",
+					"item": [
+						{
+							"name": "http://localhost:3000/api/auth/session",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic3VwZXJhZG1pbkBzb2xhci5jb20iLCJuYW1lIjoiUGFuZGV5IGppIiwicm9sZSI6eyJpZCI6MSwibmFtZSI6IlN1cGVyIEFkbWluIiwiaXNTdXBlckFkbWluIjp0cnVlfSwiYnVzaW5lc3MiOm51bGwsImlhdCI6MTc1MDUwNDE3OSwiZXhwIjoxNzUxMTA4OTc5fQ.SJcsLzvweQe1ls3g-5eArU0T6fFcjsbR1z82T_K-P0w\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/session",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"session"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/logout",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								},
+								"description": "Logout User"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete_user",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/delete_user",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"delete_user"
+									]
+								},
+								"description": "delete user"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "permissions",
+					"item": [
+						{
+							"name": "permission",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/permissions",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"permissions"
+									]
+								},
+								"description": "shows all permission of login user"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "request_otp",
+					"item": [
+						{
+							"name": "request_otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"ishika@hbeonlabs.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/request_otp",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"request_otp"
+									]
+								},
+								"description": "it sends you otp via email"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "validate_otp",
+					"item": [
+						{
+							"name": "validate_otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"ishika@hbeonlabs.com\",\r\n    \"otp\": \"372994\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/validate_otp",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"validate_otp"
+									]
+								},
+								"description": "it validates otp sent to email"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reset password",
+					"item": [
+						{
+							"name": "forget",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-device-id",
+										"value": "hbeon_mobile",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"email\" : \"vimal@gmail.com\", \r\n    \"password\" : \"vimal@123\" \r\n}"
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/auth/reset_password",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"reset_password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "dashboard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic3VwZXJhZG1pbkBzb2xhci5jb20iLCJuYW1lIjoiUGFuZGV5IGppIiwicm9sZSI6eyJpZCI6MSwibmFtZSI6IlN1cGVyIEFkbWluIiwiaXNTdXBlckFkbWluIjp0cnVlfSwiYnVzaW5lc3MiOm51bGwsImlhdCI6MTc1MDUwNDE3OSwiZXhwIjoxNzUxMTA4OTc5fQ.SJcsLzvweQe1ls3g-5eArU0T6fFcjsbR1z82T_K-P0w\"\r\n}"
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/dashboard",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"dashboard"
+							]
+						},
+						"description": "Shows detailed data inside dashboard"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload_bin",
+			"item": [
+				{
+					"name": "upload_bin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"filePath\": \"/home/iotrms/etc/19-07-2025/solar_power_tracker/public/binFiles\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/upload",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						},
+						"description": "this delete the file added in public folder"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LoggerDevice",
+			"item": [
+				{
+					"name": "logger_device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mac_address\":\"4091517DCB478244039\"\r\n}"
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/LoggerDevice",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"LoggerDevice"
+							]
+						},
+						"description": "this shows all the live data coming for that logger"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plantDashboard",
+			"item": [
+				{
+					"name": "plantdashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/plantdashboard/?id=1",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plantdashboard",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Shows detailed plant dashboard of specific plantId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plantStatus",
+			"item": [
+				{
+					"name": "plantStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/plantStatus",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"plantStatus"
+							]
+						},
+						"description": "this shows status of only plantIds whether online, offline, incomplete or partially offline"
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/deviceStatus",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"deviceStatus"
+							]
+						},
+						"description": "this shows status of logger and plantIds whether online or offline"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "fota",
+			"item": [
+				{
+					"name": "{{Base_Url}}/api/fota?mac_address=E8DB84C1727A",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/fota?mac_address=E098060FDBF5",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"fota"
+							],
+							"query": [
+								{
+									"key": "mac_address",
+									"value": "E098060FDBF5"
+								}
+							]
+						},
+						"description": "this shows fota and firware no of logger sno"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "businessses",
+			"item": [
+				{
+					"name": "id",
+					"item": [
+						{
+							"name": "business",
+							"item": [
+								{
+									"name": "{{Base_Url}}/api/businesses/id/business",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{Base_Url}}/api/businesses/2/business",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"businesses",
+												"2",
+												"business"
+											]
+										},
+										"description": "Shows all details of businesses added by its id"
+									},
+									"response": []
+								},
+								{
+									"name": "{{Base_Url}}/api/businesses/2/business",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{Base_Url}}/api/businesses/2/business",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"businesses",
+												"2",
+												"business"
+											]
+										},
+										"description": "Deletes details of businesses added by id"
+									},
+									"response": []
+								},
+								{
+									"name": "{{Base_Url}}/api/businesses/2/business",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{Base_Url}}/api/businesses/2/business",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"businesses",
+												"2",
+												"business"
+											]
+										},
+										"description": "Edits details of businesses added by id"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "member",
+							"item": [
+								{
+									"name": "{{Base_Url}}/api/businesses/2/members",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{Base_Url}}/api/businesses/2/members",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"businesses",
+												"2",
+												"members"
+											]
+										},
+										"description": "shows all members detail with its role for that business id"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{{Base_Url}}/api/businesses/memberpage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/businesses/memberpage",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								"memberpage"
+							]
+						},
+						"description": "shows all the businesses added"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/businesses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/businesses",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							]
+						},
+						"description": "adds new business"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/businesses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/businesses",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							]
+						},
+						"description": "Shows all details of businesses added"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/businesses/search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/businesses/search?email=info@solar.com",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "info@solar.com"
+								}
+							]
+						},
+						"description": "add business to that member by search"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InverterDevice",
+			"item": [
+				{
+					"name": "InverterDevice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"device_sn\": \"4091517DCB478244039\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/InverterDevice",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"InverterDevice"
+							]
+						},
+						"description": "this api shows live data of that logger"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Devicelibrary",
+			"item": [
+				{
+					"name": "{{Base_Url}}/api/device_library",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/device_library",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"device_library"
+							]
+						},
+						"description": "shows devices(logger/inverter) we added in library"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/device_library",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logger_sno\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/device_library",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"device_library"
+							]
+						},
+						"description": "Device you want to add which already exists in app"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "environment",
+			"item": [
+				{
+					"name": "{{Base_Url}}/api/environment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plantId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/environment",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"environment"
+							]
+						},
+						"description": "shows environment details of that plantId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "members",
+			"item": [
+				{
+					"name": "{{Base_Url}}/members/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/members/1",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"members",
+								"1"
+							]
+						},
+						"description": "deletes member via id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "Id",
+					"item": [
+						{
+							"name": "permissions",
+							"item": [
+								{
+									"name": "{{Base_Url}}/api/roles/id/permissions",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{Base_Url}}/api/roles/1/permissions",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"roles",
+												"1",
+												"permissions"
+											]
+										},
+										"description": "shows permissions given to that role by its role id"
+									},
+									"response": []
+								},
+								{
+									"name": "{{Base_Url}}/api/roles/id/permissions",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"permissionIds\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Base_Url}}/api/roles/1/permissions",
+											"host": [
+												"{{Base_Url}}"
+											],
+											"path": [
+												"api",
+												"roles",
+												"1",
+												"permissions"
+											]
+										},
+										"description": "Edits permissions given to that role by its role id"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "{{Base_Url}}/api/roles/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/roles/1",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"roles",
+										"1"
+									]
+								},
+								"description": "edits role details by role id"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "{{Base_Url}}/api/roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/roles",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/roles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/roles",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "adds new role with its description"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/roles",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/roles",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "deletes role by roleId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "unbind_logger",
+			"item": [
+				{
+					"name": "{{Base_Url}}/api/unbind_logger",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sno\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_Url}}/api/unbind_logger",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"unbind_logger"
+							]
+						},
+						"description": "deletes logger from plant"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "{{Base_Url}}/api/user/profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/user/profile",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"profile"
+							]
+						},
+						"description": "shows details of user with its business, role and permissions"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "id",
+					"item": [
+						{
+							"name": "{{Base_Url}}/api/users/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Base_Url}}/api/users/1",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								},
+								"description": "shows only the information of that userid"
+							},
+							"response": []
+						},
+						{
+							"name": "{{Base_Url}}/api/users/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"role_id\": \"1\",\r\n    \"business_id\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Base_Url}}/api/users/1",
+									"host": [
+										"{{Base_Url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								},
+								"description": "edits only the information of that userid"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "{{Base_Url}}/api/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_Url}}/api/users",
+							"host": [
+								"{{Base_Url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "shows info about all the users"
+					},
+					"response": []
+				},
+				{
+					"name": "{{Base_Url}}/api/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "edits the user of given request"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"serialNumber\":\"68C63AD1ED67\",\r\n   \"actualSuppliedVoltage\" : \"200\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/mqtt_apis/command_write",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"mqtt_apis",
+						"command_write"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/api/deviceStatus",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"deviceStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
