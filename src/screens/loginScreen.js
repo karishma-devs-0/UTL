@@ -34,7 +34,9 @@ const authService = {
 */
 
 const LoginScreen = ({ navigation }) => {
+  const [loginVia, setLoginVia] = useState('email');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleSignInAvailable, setIsGoogleSignInAvailable] = useState(false);
@@ -73,8 +75,10 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
 
+    const loginIdentifier = loginVia === 'username' ? username : email;
+
     const result = await performHardcodedLogin({
-      email,
+      email: loginIdentifier,
       password,
       setIsLoading,
       login
@@ -89,20 +93,50 @@ const LoginScreen = ({ navigation }) => {
 
         <View style={styles.loginTopContainer}>
           <View style={styles.loginFormContainer}>
-           
+
+            <View style={{ flexDirection: 'row', marginBottom: 12, gap: 10 }}>
+              <TouchableOpacity
+                onPress={() => setLoginVia('email')}
+                activeOpacity={0.8}
+                style={{
+                  flex: 1,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                  backgroundColor: loginVia === 'email' ? '#ff0000' : '#f1f1f1',
+                }}
+              >
+                <Text style={{ color: loginVia === 'email' ? '#fff' : '#333', fontWeight: '700' }}>Email</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => setLoginVia('username')}
+                activeOpacity={0.8}
+                style={{
+                  flex: 1,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                  backgroundColor: loginVia === 'username' ? '#ff0000' : '#f1f1f1',
+                }}
+              >
+                <Text style={{ color: loginVia === 'username' ? '#fff' : '#333', fontWeight: '700' }}>Username</Text>
+              </TouchableOpacity>
+            </View>
+
             <View style={styles.inputWithIconContainer}>
               <TextInput
                 style={styles.LoginInputWithInlineIcon}
-                placeholder="Enter your Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
+                placeholder={loginVia === 'username' ? 'Enter your Username' : 'Enter your Email'}
+                value={loginVia === 'username' ? username : email}
+                onChangeText={loginVia === 'username' ? setUsername : setEmail}
+                keyboardType={loginVia === 'username' ? 'default' : 'email-address'}
                 autoCapitalize="none"
                 placeholderTextColor="#999"
               />
-              <Icon name="email" size={20} color="#666" style={styles.inlineInputIcon} />
+              <Icon name={loginVia === 'username' ? 'person' : 'email'} size={20} color="#666" style={styles.inlineInputIcon} />
             </View>
-           
+
             <View style={styles.inputWithIconContainer}>
               <TextInput
                 style={styles.LoginInputWithDoubleIcon}
@@ -115,22 +149,21 @@ const LoginScreen = ({ navigation }) => {
                 autoCorrect={false}
               />
               <Icon name="lock" size={20} color="#666" style={styles.inlineInputIcon} />
-              <TouchableOpacity 
-                style={styles.eyeIconContainer} 
+              <TouchableOpacity
+                style={styles.eyeIconContainer}
                 onPress={togglePasswordVisibility}
                 activeOpacity={0.7}
               >
-                <Icon 
-                  name={showPassword ? "visibility-off" : "visibility"} 
-                  size={20} 
-                  color="#666" 
+                <Icon
+                  name={showPassword ? "visibility-off" : "visibility"}
+                  size={20}
+                  color="#666"
                 />
               </TouchableOpacity>
             </View>
-            
 
             <View style={styles.linkContainer}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 onPress={() => navigation.navigate('ForgotPassword')}
                 style={{ width: '100%', alignItems: 'flex-end' }}
               >
