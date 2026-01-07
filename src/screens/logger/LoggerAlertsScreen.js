@@ -25,6 +25,7 @@ const LoggerAlertsScreen = ({ route, navigation, loggerId, showMenu, onMenuPress
       <LoggerAppBar 
         title={`Logger ${loggerIdToShow}`}
         showMenu={showMenu}
+        menuIconName="settings"
         onMenuPress={onMenuPress}
       />
       <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
