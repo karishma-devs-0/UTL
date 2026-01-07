@@ -28,7 +28,7 @@ const LoggerAlertsScreen = ({ route, navigation, loggerId, showMenu, onMenuPress
         menuIconName="settings"
         onMenuPress={onMenuPress}
       />
-      <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
+      <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
         <View style={localStyles.container}>
           {/* Tab Bar */}
           <View style={localStyles.tabBar}>
