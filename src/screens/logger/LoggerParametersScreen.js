@@ -251,6 +251,7 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
       <LoggerAppBar 
         title={loggerName}
         showMenu={showMenu}
+        menuIconName="settings"
         onMenuPress={onMenuPress}
       />
       <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
