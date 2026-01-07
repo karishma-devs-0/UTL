@@ -20,7 +20,7 @@ import * as Location from 'expo-location';
 import styles from '../styles/style';
 import dataManager from '../utils/dataManager.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SafeMapComponent from './ SafeMapComponent';
+import SafeMapComponent from './SafeMapComponent';
 // Add ins styles for AddPlant screen only
 const addPlantStyles = {
   container: {
