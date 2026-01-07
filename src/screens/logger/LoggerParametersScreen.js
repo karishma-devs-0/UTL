@@ -171,7 +171,7 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
           title={`Logger ${routeLoggerId || ''}`}
           showMenu={false}
         />
-        <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
+        <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
           <View style={localStyles.centeredMessageContainer}>
             <ActivityIndicator size="large" color={COLORS.primary} />
             <Text style={localStyles.loadingText}>Loading Logger Parameters...</Text>
@@ -188,7 +188,7 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
           title={`Logger ${routeLoggerId || ''}`}
           showMenu={false}
         />
-        <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
+        <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
           <View style={localStyles.centeredMessageContainer}>
             <Icon name="error-outline" size={48} color={COLORS.errorText} />
             <Text style={localStyles.errorText}>{error}</Text>
@@ -208,7 +208,7 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
           title={`Logger ${routeLoggerId || ''}`}
           showMenu={false}
         />
-        <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
+        <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
           <View style={localStyles.centeredMessageContainer}>
             <Icon name="info-outline" size={48} color={COLORS.secondary} />
             <Text style={localStyles.infoText}>No logger parameters to display.</Text>
@@ -254,7 +254,7 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
         menuIconName="settings"
         onMenuPress={onMenuPress}
       />
-      <SafeAreaView style={localStyles.safeArea} edges={['bottom']}>
+      <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
         <ScrollView
           style={localStyles.container}
           contentContainerStyle={localStyles.contentContainer}
