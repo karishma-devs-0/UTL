@@ -30,6 +30,7 @@ const COLORS = {
 const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerData, loggerId: externalLoggerId, plantId: externalPlantId, showMenu, onMenuPress }) => {
   // Use provided data if available, otherwise try to get from route params
   const routeParams = route?.params || {};
+  const returnTo = routeParams?.returnTo;
   const initialBasicData = externalLoggerData || routeParams.loggerData;
   const routeLoggerId = externalLoggerId || routeParams.loggerId;
   const routePlantId = externalPlantId || routeParams.plantId;
@@ -169,6 +170,14 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
       <>
         <LoggerAppBar 
           title={`Logger ${routeLoggerId || ''}`}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
           showMenu={false}
         />
         <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
@@ -186,6 +195,14 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
       <>
         <LoggerAppBar 
           title={`Logger ${routeLoggerId || ''}`}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
           showMenu={false}
         />
         <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
@@ -206,6 +223,14 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
       <>
         <LoggerAppBar 
           title={`Logger ${routeLoggerId || ''}`}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
           showMenu={false}
         />
         <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
@@ -250,8 +275,16 @@ const LoggerParametersScreen = ({ route, navigation, loggerData: externalLoggerD
     <>
       <LoggerAppBar 
         title={loggerName}
+        onBackPress={() => {
+          if (returnTo === 'Architecture') {
+            navigation.setParams({ returnTo: undefined });
+            navigation.navigate('Architecture');
+            return;
+          }
+          navigation.goBack();
+        }}
         showMenu={showMenu}
-        menuIconName="settings"
+        menuIconName="more-vert"
         onMenuPress={onMenuPress}
       />
       <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>

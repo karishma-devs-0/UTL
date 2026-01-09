@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Alert,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
@@ -21,10 +22,17 @@ const COLORS = {
     borderLight: '#eee',
 };
 
-const LoggerArchitectureScreen = ({ route, navigation, loggerData, showMenu, onMenuPress }) => {
+const LoggerArchitectureScreen = ({ route, navigation, loggerData, plantId: plantIdProp, showMenu, onMenuPress }) => {
   const routeParams = route?.params || {};
   const loggerDataToUse = loggerData || routeParams.loggerData || {};
   const loggerId = loggerDataToUse?.sno || routeParams.loggerId || '';
+  const loggerSno = loggerDataToUse?.sno || loggerDataToUse?.loggerSno || loggerDataToUse?.logger_sno || routeParams?.loggerId;
+  const plantId =
+    plantIdProp ||
+    loggerDataToUse?.plantId ||
+    loggerDataToUse?.plant_id ||
+    routeParams?.plantId ||
+    routeParams?.plant_id;
   
   const [isExpanded, setIsExpanded] = useState(false); // Start collapsed
 
@@ -52,7 +60,7 @@ const LoggerArchitectureScreen = ({ route, navigation, loggerData, showMenu, onM
       <LoggerAppBar 
         title={`Logger ${loggerId}`}
         showMenu={showMenu}
-        menuIconName="settings"
+        menuIconName="more-vert"
         onMenuPress={onMenuPress}
       />
       <SafeAreaView style={localStyles.safeArea} edges={['left', 'right', 'bottom']}>
@@ -63,23 +71,77 @@ const LoggerArchitectureScreen = ({ route, navigation, loggerData, showMenu, onM
 
             <View style={localStyles.itemContainer}>
                 {/* Logger Row */}
-                <TouchableOpacity style={localStyles.row} onPress={toggleExpand} activeOpacity={0.7}>
-                    <Icon 
-                        name={isExpanded ? "remove-circle-outline" : "add-circle-outline"} 
-                        size={22} 
-                        color={COLORS.primary} 
-                        style={localStyles.expandIcon} 
-                    />
-                    <Text style={localStyles.itemText}>
-                        Logger: {loggerDataToUse?.sno ?? 'N/A'}
-                    </Text>
-                    {getNetworkIcon('online')}
-                    {/* Assuming logger is online */}
-                </TouchableOpacity>
+                <View style={localStyles.row}>
+                    <TouchableOpacity
+                        onPress={toggleExpand}
+                        activeOpacity={0.7}
+                        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                        style={localStyles.expandIconButton}
+                    >
+                        <Icon 
+                            name={isExpanded ? "remove-circle-outline" : "add-circle-outline"} 
+                            size={22} 
+                            color={COLORS.primary} 
+                            style={localStyles.expandIcon} 
+                        />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={localStyles.loggerRowContent}
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('Parameters', { returnTo: 'Architecture' })}
+                    >
+                        <Text style={localStyles.itemText}>
+                            Logger: {loggerDataToUse?.sno ?? 'N/A'}
+                        </Text>
+                        {getNetworkIcon('online')}
+                        {/* Assuming logger is online */}
+                    </TouchableOpacity>
+                </View>
 
                 {/* Inverter Row(s) - Conditionally Rendered */}
                 {isExpanded && inverters.map((inverter, index) => (
-                    <View key={inverter.sno || index} style={[localStyles.row, localStyles.indentedRow]}>
+                    <TouchableOpacity
+                        key={inverter.sno || index}
+                        style={[localStyles.row, localStyles.indentedRow]}
+                        activeOpacity={0.7}
+                        onPress={() => {
+                          const inverterSno = inverter?.sno;
+
+                          if (!inverterSno) {
+                            Alert.alert('Navigation Error', 'Cannot open inverter, inverter S/N is missing.');
+                            return;
+                          }
+                          if (!loggerSno) {
+                            Alert.alert('Navigation Error', 'Cannot open inverter, logger S/N is missing.');
+                            return;
+                          }
+                          if (!plantId) {
+                            Alert.alert('Navigation Error', 'Cannot open inverter, Plant ID is missing.');
+                            return;
+                          }
+
+                          const deviceData = {
+                            ...loggerDataToUse,
+                            inverterSno,
+                            inverter_sno: inverterSno,
+                            loggerSno,
+                            logger_sno: loggerSno,
+                            plantId,
+                            plant_id: plantId,
+                          };
+
+                          let rootNav = navigation;
+                          while (rootNav?.getParent?.()) {
+                            rootNav = rootNav.getParent();
+                          }
+                          if (!rootNav?.navigate) {
+                            Alert.alert('Navigation Error', 'Cannot navigate to inverter page.');
+                            return;
+                          }
+                          rootNav.navigate('InverterTabs', { deviceData });
+                        }}
+                    >
                         {/* Indentation Placeholder/Spacer */}
                         <View style={{ width: 22, marginRight: 10 }} /> 
                         
@@ -87,7 +149,7 @@ const LoggerArchitectureScreen = ({ route, navigation, loggerData, showMenu, onM
                             Inverter: {inverter.sno ?? 'N/A'}
                         </Text>
                         {getNetworkIcon(inverter.status)}
-                    </View>
+                    </TouchableOpacity>
                 ))}
             </View>
         </ScrollView>
@@ -131,6 +193,15 @@ const localStyles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.borderLight,
+  },
+  expandIconButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loggerRowContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   indentedRow: {
     marginLeft: 15,

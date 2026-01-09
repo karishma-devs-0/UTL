@@ -294,6 +294,7 @@ const LoggerTabNavigator = ({ route, navigation }) => {
             <LoggerArchitectureScreen
               {...props}
               loggerData={internalLoggerData}
+              plantId={plantId}
               showMenu={true}
               onMenuPress={() => setIsMenuModalVisible(true)}
             />
