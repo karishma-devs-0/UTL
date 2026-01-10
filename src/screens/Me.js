@@ -380,17 +380,14 @@ const Me = ({ navigation, route }) => {
             <Ionicons name="chevron-forward-outline" size={24} color="black" />
           </TouchableOpacity>
 
-          {/* Comment out the Settings menu item */}
-          {/*
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate('AppSettings')}
+            onPress={() => navigation.navigate('Settings')}
           >
             <Ionicons name="settings-outline" size={24} color="black" />
             <Text style={styles.menuText}>Settings</Text>
             <Ionicons name="chevron-forward-outline" size={24} color="black" />
           </TouchableOpacity>
-          */}
 
           {/* Add the About UTL SOLAR SUN + card here */}
           <TouchableOpacity style={styles.menuItem} onPress={handlePressAbout}>

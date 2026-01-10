@@ -2357,9 +2357,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
           }}
         >
           <View style={[styles.calendarCard, { width: cardWidth }]}>
-            <Text style={styles.cardTitle}>Production
-              
-            </Text>
+            <Text style={styles.cardTitle}>Production</Text>
 
             <View style={localCalendarStyles.calendarTabBar}>
               {['Day', 'Month', 'Year', 'Total'].map((tabName) => (

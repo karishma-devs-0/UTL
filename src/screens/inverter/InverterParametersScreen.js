@@ -21,20 +21,21 @@ import { SafeAreaView as SafeAreaViewSafeAreaContext } from 'react-native-safe-a
 
 // Consistent color palette (can be moved to a shared styles file)
 const COLORS = {
-  primary: '#00875A', // Main theme color
-  secondary: '#6c757d',
-  lightGray: '#F5F8FA',
-  textPrimary: '#333',
-  textSecondary: '#555',
-  borderLight: '#eee',
-  white: '#FFFFFF',
-  errorRed: '#D32F2F',
-  warningOrange: '#FFA000',
+    primary: '#00875A', // Main theme color
+    secondary: '#6c757d',
+    lightGray: '#F5F8FA',
+    textPrimary: '#333',
+    textSecondary: '#555',
+    borderLight: '#eee',
+    white: '#FFFFFF',
+    errorRed: '#D32F2F',
+    warningOrange: '#FFA000',
 };
 
 const InverterParametersScreen = ({ route, navigation, device: externalDevice, liveData: externalLiveData, showMenu, onMenuPress }) => {
   const { device } = route.params || {}; // Contains inverter_sno and plantId (e.g., device.inverter_sno, device.plant_id)
-
+  const returnTo = route?.params?.returnTo;
+  
   const [inverterParams, setInverterParams] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -44,7 +45,7 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
   const fetchInverterParameters = async () => {
     const currentLoggerSno = device?.loggerSno || device?.logger_sno || device?.sno || device?.sn || device?.id;
     const currentPlantId = device?.plantId || device?.plant_id;
-
+    
     if (!device || !currentLoggerSno || !currentPlantId) {
       setError('Logger S/N or Plant ID is missing.');
       setIsLoading(false);
@@ -79,7 +80,7 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
     setIsRefreshing(true);
     fetchInverterParameters().finally(() => setIsRefreshing(false));
   };
-
+  
   // Helper function to get inverter status text
   const getInverterStatusText = (statusCode) => {
     switch (String(statusCode)) {
@@ -325,7 +326,16 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
           showMenu={true}
           menuIconName="settings"
           onMenuPress={() => setIsCommandMenuVisible(true)}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
         />
+
         <View style={localStyles.centeredMessageContainer}>
           <ActivityIndicator size="large" color={COLORS.primary} />
           <Text style={localStyles.loadingText}>Loading Inverter Parameters...</Text>
@@ -342,7 +352,16 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
           showMenu={true}
           menuIconName="settings"
           onMenuPress={() => setIsCommandMenuVisible(true)}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
         />
+
         <View style={localStyles.centeredMessageContainer}>
           <Icon name="error-outline" size={48} color={COLORS.errorRed} />
           <Text style={localStyles.errorText}>{error}</Text>
@@ -510,6 +529,14 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
     <SafeAreaViewSafeAreaContext style={localStyles.mainContainer} edges={['top', 'bottom']}>
       <InverterAppBar
         title={`Inverter ${inverterId}`}
+        onBackPress={() => {
+          if (returnTo === 'Architecture') {
+            navigation.setParams({ returnTo: undefined });
+            navigation.navigate('Architecture');
+            return;
+          }
+          navigation.goBack();
+        }}
         showMenu={true}
         menuIconName="settings"
         onMenuPress={() => setIsCommandMenuVisible(true)}
@@ -521,17 +548,17 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
         animationType="fade"
         onRequestClose={() => setIsCommandMenuVisible(false)}
       >
-        <Pressable style={localStyles.commandMenuOverlay} onPress={() => setIsCommandMenuVisible(false)}>
-          <Pressable style={localStyles.commandMenuContainer} onPress={() => {}}>
-            <TouchableOpacity
-              style={localStyles.commandMenuItem}
-              onPress={() => handleCommandMenuSelect('Remote Control')}
-            >
-              <Text style={localStyles.commandMenuItemText}>Remote Control</Text>
-            </TouchableOpacity>
+          <Pressable style={localStyles.commandMenuOverlay} onPress={() => setIsCommandMenuVisible(false)}>
+            <Pressable style={localStyles.commandMenuContainer} onPress={() => {}}>
+              <TouchableOpacity
+                style={localStyles.commandMenuItem}
+                onPress={() => handleCommandMenuSelect('Remote Control')}
+              >
+                <Text style={localStyles.commandMenuItemText}>Remote Control</Text>
+              </TouchableOpacity>
+            </Pressable>
           </Pressable>
-        </Pressable>
-      </Modal>
+        </Modal>
 
       <ScrollView
         style={localStyles.container}

@@ -70,8 +70,29 @@ export const loginAuth = async (email, password) => {
       data: response.data        // Pass through complete data
     };
   } catch (error) {
-    console.error('[AuthService] Login failed:', error.response?.data || error.message);
-    return { success: false, error: error.response?.data?.message || 'Login failed' };
+    const status = error.response?.status;
+    const serverMessage = error.response?.data?.message;
+    const serverData = error.response?.data;
+    const isNetworkError = !error.response;
+
+    console.error('[AuthService] Login failed:', {
+      message: error.message,
+      status,
+      data: serverData,
+      isNetworkError,
+    });
+
+    if (isNetworkError) {
+      return {
+        success: false,
+        error: 'Network Error: Unable to reach server. Check internet/VPN/DNS/SSL and API base URL.',
+      };
+    }
+
+    return {
+      success: false,
+      error: serverMessage || (status ? `Login failed (HTTP ${status})` : 'Login failed'),
+    };
   }
 };
 

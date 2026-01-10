@@ -59,7 +59,7 @@ const InverterAppBar = ({
         </TouchableOpacity>
 
         <Text numberOfLines={1} style={styles.title}>{title || 'Inverter Details'}</Text>
-
+        
         {showMenu ? (
           <TouchableOpacity
             onPress={onMenuPress}
@@ -85,10 +85,7 @@ const InverterAppBar = ({
             ) : null}
           </TouchableOpacity>
         ) : (
-          <>
-            {/* Empty view to balance spacing */}
-            <View style={styles.iconPlaceholder} />
-          </>
+          <View style={styles.iconPlaceholder} />
         )}
       </View>
     </SafeAreaView>
@@ -145,4 +142,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InverterAppBar;
+export default InverterAppBar; 

@@ -44,62 +44,34 @@ export const formatProductionValue = (value, forceUnit = null) => {
 
   const numericValue = parseFloat(value);
 
-  // Handle forced units with automatic scaling for large numbers
+  // Handle forced units
   if (forceUnit) {
     switch (forceUnit) {
       case 'W':
-        if (numericValue >= 1000000) {
-          return { value: (numericValue / 1000000).toFixed(2), unit: 'MW' };
-        } else if (numericValue >= 1000) {
-          return { value: (numericValue / 1000).toFixed(2), unit: 'kW' };
-        }
         return { value: numericValue.toFixed(2), unit: 'W' };
-
       case 'kW':
-        if (numericValue >= 1000000) {
-          return { value: (numericValue / 1000000).toFixed(2), unit: 'GW' };
-        } else if (numericValue >= 1000) {
-          return { value: (numericValue / 1000).toFixed(2), unit: 'MW' };
-        }
-        return { value: numericValue.toFixed(2), unit: 'kW' };
-
-      case 'kWp':
-        if (numericValue >= 1000000000000) {
-          return { value: (numericValue / 1000000000000).toFixed(2), unit: 'TWp' };
-        } else if (numericValue >= 1000000000) {
-          return { value: (numericValue / 1000000000).toFixed(2), unit: 'GWp' };
-        } else if (numericValue >= 1000000) {
-          return { value: (numericValue / 1000000).toFixed(2), unit: 'MWp' };
-        } else if (numericValue >= 1000) {
-          return { value: (numericValue / 1000).toFixed(2), unit: 'kWp' };
-        }
-        return { value: numericValue.toFixed(2), unit: 'Wp' };
-
+        return { value: (numericValue).toFixed(2), unit: 'kW' };
       case 'MWh':
-        // Only scale to GWh if value is >= 1,000,000 (1 million MWh)
-        if (numericValue >= 1000000) {
-          return { value: (numericValue / 1000000).toFixed(2), unit: 'TWh' };
-        } else if (numericValue >= 10000) {
-          return { value: (numericValue / 1000).toFixed(2), unit: 'GWh' };
-        }
-        return { value: numericValue.toFixed(2), unit: 'MWh' };
-
+        // Convert from kWh to MWh
+        return { value: (numericValue).toFixed(2), unit: 'MWh' };
       case 'kWh':
-        if (numericValue >= 1000000) {
-          return { value: (numericValue / 1000000).toFixed(2), unit: 'GWh' };
-        } else if (numericValue >= 1000) {
-          return { value: (numericValue / 1000).toFixed(2), unit: 'MWh' };
-        }
-        return { value: numericValue.toFixed(2), unit: 'kWh' };
-
       default:
-        return { value: numericValue.toFixed(2), unit: forceUnit };
+        return { value: numericValue.toFixed(2), unit: 'kWh' };
     }
   }
 
   const response = formatEnergyWithUnit(value);
+
   return response;
+
+  // Automatic conversion based on magnitude
+  //if (Math.abs(numericValue) >= 10000) {
+  //return { value: (numericValue / 1000).toFixed(2), unit: 'MWh' };
+  //}
+
+  //return { value: numericValue.toFixed(2), unit: 'kWh' };
 };
+
 
 /**
  * Formats a production value for display with its unit
@@ -122,14 +94,12 @@ export const formatProductionData = (data) => {
 
   return {
     installed_capacity: formatProductionValue(data.installed_capacity, 'kW'),
-    daily_production: formatProductionValue(data.daily_production ?? data.current_day_production, 'kWh'),
+    daily_production: formatProductionValue(data.daily_production, 'kWh'),
     current_power: formatProductionValue(data.current_power, 'W'),
     utilization_percentage: data.utilization_percentage,
-    current_day_production: formatProductionValue(data.current_day_production ?? data.daily_production, 'kWh'),
+    current_day_production: formatProductionValue(data.current_day_production, 'kWh'),
     monthly_production: formatProductionValue(data.monthly_production, 'kWh'),
-    // API provides yearly_production in kWh; convert appropriately
-    yearly_production: formatProductionValue(data.yearly_production ?? data.yearlyProduction, 'kWh'),
-    // API provides total_production in kWh; convert appropriately
-    total_production: formatProductionValue(data.total_production ?? data.totalProduction, 'kWh')
+    yearly_production: formatProductionValue(data.yearlyProduction, 'MWh'),
+    total_production: formatProductionValue(data.totalProduction, 'MWh')
   };
 }; 

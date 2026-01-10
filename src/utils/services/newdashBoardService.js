@@ -14,12 +14,13 @@ export const apiGetDashboardService = async () => {
     }
 
     try {
-        const response = await api.get('/dashboard', { id: plantdashboard }, {
-            headers: { Authorization: `Bearer ${token}`, "x-device-id": device_id },
+        const response = await api.get('/dashboard', {
+            headers: { Authorization: `Bearer ${token}`, 'x-device-id': device_id },
         });
         return response;
     } catch (error) {
-        return
+        console.error('[apiGetDashboardService] Failed to fetch dashboard:', error?.message || error);
+        return { data: null, error: true };
     }
 };
 
