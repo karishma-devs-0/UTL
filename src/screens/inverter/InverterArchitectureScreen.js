@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Alert,
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
@@ -24,7 +25,7 @@ const COLORS = {
     white: '#fff'
 };
 
-const InverterArchitectureScreen = ({ route }) => {
+const InverterArchitectureScreen = ({ route, navigation }) => {
   const { device } = route.params || {};
   const inverterId = device?.inverterSno || device?.inverter_sno || device?.sno || device?.id || '';
   const plantId = device?.plantId || '';
@@ -96,31 +97,61 @@ const InverterArchitectureScreen = ({ route }) => {
             ) : (
                 <View style={styles.itemContainer}>
                     {/* Inverter Row */}
-                    <TouchableOpacity style={styles.row} onPress={toggleExpand} activeOpacity={0.7}>
-                        <Icon 
-                            name={isExpanded ? "remove-circle-outline" : "add-circle-outline"} 
-                            size={22} 
-                            color={COLORS.primary} 
-                            style={styles.expandIcon} 
-                        />
-                        <Text style={styles.itemText}>
-                            Inverter: {inverterId ?? 'N/A'}
-                        </Text>
-                        {getNetworkIcon('online')}
-                        {/* Assuming inverter is online */}
-                    </TouchableOpacity>
+                    <View style={styles.row}>
+                        <TouchableOpacity
+                            onPress={toggleExpand}
+                            activeOpacity={0.7}
+                            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                            style={styles.expandIconButton}
+                        >
+                            <Icon
+                                name={isExpanded ? "remove-circle-outline" : "add-circle-outline"}
+                                size={22}
+                                color={COLORS.primary}
+                                style={styles.expandIcon}
+                            />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.inverterRowContent}
+                            activeOpacity={0.7}
+                            onPress={() => navigation.navigate('Parameters', { device, returnTo: 'Architecture' })}
+                        >
+                            <Text style={styles.itemText}>
+                                Inverter: {inverterId ?? 'N/A'}
+                            </Text>
+                            {getNetworkIcon('online')}
+                            {/* Assuming inverter is online */}
+                        </TouchableOpacity>
+                    </View>
 
                     {/* Connected Device Row(s) - Conditionally Rendered */}
-                    {isExpanded && connectedDevices.length > 0 && connectedDevices.map((device, index) => (
-                        <View key={device.sno || index} style={[styles.row, styles.indentedRow]}>
+                    {isExpanded && connectedDevices.length > 0 && connectedDevices.map((loggerDevice, index) => (
+                        <TouchableOpacity
+                            key={loggerDevice.sno || index}
+                            style={[styles.row, styles.indentedRow]}
+                            activeOpacity={0.7}
+                            onPress={() => {
+                                const loggerId = loggerDevice?.sno;
+                                if (!loggerId) {
+                                    Alert.alert('Navigation Error', 'Cannot view logger details, S/N is missing.');
+                                    return;
+                                }
+                                if (!plantId) {
+                                    Alert.alert('Navigation Error', 'Cannot view logger details, Plant ID is missing.');
+                                    return;
+                                }
+                                navigation.navigate('LoggerTabs', { loggerId, plantId });
+                            }}
+                        >
                             {/* Indentation Placeholder/Spacer */}
                             <View style={{ width: 22, marginRight: 10 }} /> 
                             
                             <Text style={styles.itemText}>
-                                Logger: {device.sno ?? 'N/A'}
+                                Logger: {loggerDevice.sno ?? 'N/A'}
                             </Text>
-                            {getNetworkIcon(device.status)}
-                        </View>
+                            {getNetworkIcon(loggerDevice.status)}
+                        </TouchableOpacity>
                     ))}
                     
                     {isExpanded && connectedDevices.length === 0 && (
@@ -174,6 +205,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.borderLight,
+  },
+  expandIconButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inverterRowContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   indentedRow: {
     marginLeft: 15,

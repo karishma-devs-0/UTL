@@ -34,6 +34,7 @@ const COLORS = {
 
 const InverterParametersScreen = ({ route, navigation, device: externalDevice, liveData: externalLiveData, showMenu, onMenuPress }) => {
   const { device } = route.params || {}; // Contains inverter_sno and plantId (e.g., device.inverter_sno, device.plant_id)
+  const returnTo = route?.params?.returnTo;
   
   const [inverterParams, setInverterParams] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -325,6 +326,14 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
           showMenu={true}
           menuIconName="settings"
           onMenuPress={() => setIsCommandMenuVisible(true)}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
         />
 
         <View style={localStyles.centeredMessageContainer}>
@@ -343,6 +352,14 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
           showMenu={true}
           menuIconName="settings"
           onMenuPress={() => setIsCommandMenuVisible(true)}
+          onBackPress={() => {
+            if (returnTo === 'Architecture') {
+              navigation.setParams({ returnTo: undefined });
+              navigation.navigate('Architecture');
+              return;
+            }
+            navigation.goBack();
+          }}
         />
 
         <View style={localStyles.centeredMessageContainer}>
@@ -512,6 +529,14 @@ const InverterParametersScreen = ({ route, navigation, device: externalDevice, l
     <SafeAreaViewSafeAreaContext style={localStyles.mainContainer} edges={['top', 'bottom']}>
       <InverterAppBar
         title={`Inverter ${inverterId}`}
+        onBackPress={() => {
+          if (returnTo === 'Architecture') {
+            navigation.setParams({ returnTo: undefined });
+            navigation.navigate('Architecture');
+            return;
+          }
+          navigation.goBack();
+        }}
         showMenu={true}
         menuIconName="settings"
         onMenuPress={() => setIsCommandMenuVisible(true)}
