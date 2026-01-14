@@ -223,7 +223,7 @@ const ProtectParameterScreen = ({ navigation, route }) => {
                 <Icon
                   name={isSelectAllChecked ? 'check-box' : 'check-box-outline-blank'}
                   size={22}
-                  color={colors?.secondary || '#00875A'}
+                  color={colors?.secondary || '#ff0000'}
                 />
               </TouchableOpacity>
               <Text style={localStyles.selectAllText}>Select All Parameters</Text>
@@ -245,7 +245,7 @@ const ProtectParameterScreen = ({ navigation, route }) => {
                     <Icon
                       name={item.selected ? 'check-box' : 'check-box-outline-blank'}
                       size={22}
-                      color={colors?.secondary || '#00875A'}
+                      color={colors?.secondary || '#ff0000'}
                     />
                   </TouchableOpacity>
 

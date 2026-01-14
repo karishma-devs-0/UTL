@@ -491,7 +491,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
       if (data.success) {
         if (data.data.incomplete.plantIds.includes(currentPlantId)) {
           setPlantStatus({ 
-            color: COLORS.success || '#4CAF50', // Green color for consistency
+            color: COLORS.success || '#ff0000', // Red color for consistency
             icon: 'eco',  // Leaf icon for incomplete
             text: 'Incomplete Plants' 
           });
@@ -509,7 +509,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
           });
         } else if (data.data.online.plantIds.includes(currentPlantId)) {
           setPlantStatus({ 
-            color: COLORS.success || '#4CAF50', // Green color
+            color: COLORS.success || '#ff0000', // Red color
             icon: 'check-circle-outline', // Checkmark for online
             text: 'Online' 
           });
@@ -954,8 +954,8 @@ const PlantDetailScreen = ({ route, navigation }) => {
             return Number(powerValue.toFixed(2)); // Convert to number after formatting for display
           });
           
-          // Create consistent green color array for all bars
-          const colors = data.map(() => (opacity = 1) => `rgba(0, 150, 50, ${opacity})`);
+          // Create consistent red color array for all bars
+          const colors = data.map(() => (opacity = 1) => `rgba(255, 0, 0, ${opacity})`);
 
           // Find maximum value to determine appropriate units
           const maxTotal = Math.max(...data);
@@ -1280,7 +1280,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
     backgroundColor: "#ffffff",
     backgroundGradientFrom: "#ffffff",
     backgroundGradientTo: "#ffffff",
-    color: (opacity = 1) => `rgba(0, 100, 50, ${opacity})`, // Dark Green from Dashboard
+    color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`, // Red from Dashboard
     labelColor: (opacity = 1) => `rgba(100, 100, 100, ${opacity})`, // Grey for labels
     style: {
       borderRadius: 8,
@@ -1308,8 +1308,8 @@ const PlantDetailScreen = ({ route, navigation }) => {
     backgroundGradientFrom: "#ffffff",
     backgroundGradientTo: "#ffffff",
     decimalPlaces: 0, // Display Y-axis labels with 0 decimal places for Watts
-    color: (opacity = 1) => `rgba(0, 135, 90, ${opacity})`, // Primary green color for stroke
-    fillShadowGradient: "#E9F9F3", // Light mint green fill under the line (moved here)
+    color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`, // Primary red color for stroke
+    fillShadowGradient: "#FFE9E9", // Light red fill under the line (moved here)
     fillShadowGradientOpacity: 1, // Full opacity for the fill (moved here)
     useShadowColorFromDataset: false, // Don't use dataset color for fill
     strokeWidth: 2,
@@ -1345,7 +1345,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
  };
 
  const yearlyBarChartConfig = {
-    ...chartConfigCommon, // Inherits dark green bars
+    ...chartConfigCommon, // Inherits red bars
     decimalPlaces: 1, // Round kWh to 1 decimal place
     barPercentage: 0.5,
     // Fix y-axis display
@@ -1369,7 +1369,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
  };
 
  const totalBarChartConfig = {
-    ...chartConfigCommon, // Inherits dark green bars
+    ...chartConfigCommon, // Inherits red bars
     decimalPlaces: 2,
     barPercentage: 0.6,
     color: (opacity = 1) => `rgba(0, 150, 50, ${opacity})`, // Fixed: Ensure color is a function
@@ -1411,7 +1411,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
   };
 
  const monthlyBarChartConfig = {
-     ...chartConfigCommon, // Inherits dark green bars
+     ...chartConfigCommon, // Inherits red bars
      decimalPlaces: 0, // Display Y-axis labels with 0 decimal places for Wh
      barPercentage: 0.25, // Thin bars for many days
      propsForLabels: {
@@ -1524,7 +1524,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
   const getHighlightedChartData = (data, chartType) => {
     if (!data || !data.datasets || !data.datasets[0]) return data;
     
-    const baseColor = COLORS.primary || '#00875A';
+    const baseColor = COLORS.primary || '#ff0000';
     const highlightColor = '#2DCE98'; // Use a visually distinct color for highlight
     
     return {
@@ -1706,7 +1706,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
                       ...dayChartData.datasets[0],
                       // Use visualData for line drawing only - this makes zeros not connect
                       data: dayChartData.visualData || dayChartData.datasets[0].data,
-                      color: (opacity = 1) => `rgba(0, 135, 90, ${opacity})`, // Primary green
+                      color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`, // Primary red
                       strokeWidth: 2
                     }]
                   }}
@@ -2233,7 +2233,7 @@ const PlantDetailScreen = ({ route, navigation }) => {
             />
           ) : (
             <View style={styles.placeholderImage}>
-              <Icon name="eco" size={80} color="#00875A" />
+              <Icon name="eco" size={80} color="#ff0000" />
               <Text style={styles.placeholderText}>No Image</Text>
             </View>
           )}
@@ -2811,7 +2811,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   retryButton: {
-    backgroundColor: '#00875A',
+    backgroundColor: '#ff0000',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
@@ -2842,7 +2842,7 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     fontSize: 16,
-    color: '#00875A',
+    color: '#ff0000',
     marginTop: 8,
   },
   statusBadge: {
@@ -2897,7 +2897,7 @@ const styles = StyleSheet.create({
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#ff0000',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 4,

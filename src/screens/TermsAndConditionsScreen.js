@@ -13,9 +13,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/style';
 
 const TermsAndConditionsScreen = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
-  const [useWebView, setUseWebView] = useState(true);
+  const [useWebView, setUseWebView] = useState(false); // Start with offline content
+  
+  console.log('TermsAndConditionsScreen loaded');
   
   // You can change this URL to your actual terms & conditions URL
   const TERMS_URL = 'https://utlsolarrms.com/terms_conditions'; // Using Google's terms as example - change to your URL
@@ -27,7 +29,8 @@ const TermsAndConditionsScreen = ({ navigation }) => {
       if (navigation && typeof navigation.goBack === 'function') {
         navigation.goBack();
       } else if (navigation && typeof navigation.navigate === 'function') {
-        navigation.navigate('Register');
+        // Try to go back to Settings if coming from there, otherwise Register
+        navigation.navigate('Settings');
       } else {
         console.log('Navigation not available, showing alert');
         Alert.alert('Error', 'Unable to go back. Please restart the app.');

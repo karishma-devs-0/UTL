@@ -552,11 +552,11 @@ const MonitorPage = ({ navigation, route }) => {
       const statusString = String(on_grid_status).toLowerCase(); // Handle potential variations
       switch (statusString) {
         case 'online': 
-          statusObject = { color: '#4CAF50', text: 'Online' }; 
+          statusObject = { color: '#ff0000', text: 'Online' }; 
           break;
         case 'offline': 
           if (onlinePlantIdsFromApi.includes(plantId)) {
-            statusObject = { color: '#4CAF50', text: 'Online' }; // Corrected to Online by new API
+            statusObject = { color: '#ff0000', text: 'Online' }; // Corrected to Online by new API
           } else {
             statusObject = { color: '#FF9800', text: 'Offline' }; // Orange for Offline
           }
@@ -564,7 +564,7 @@ const MonitorPage = ({ navigation, route }) => {
         case 'unknown':
         default:
           if (onlinePlantIdsFromApi.includes(plantId)) {
-            statusObject = { color: '#4CAF50', text: 'Online' };
+            statusObject = { color: '#ff0000', text: 'Online' };
           } else if (offlinePlantIdsFromApi.includes(plantId)) {
             statusObject = { color: '#FF9800', text: 'Offline' }; 
           } else {
@@ -637,7 +637,7 @@ const MonitorPage = ({ navigation, route }) => {
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
           {/* Placeholder Icon Container (Fixed Size) - Image removed */}
           <View style={{ width: 60, height: 60, marginRight: 12, borderRadius: 8, backgroundColor: '#e0e0e0', justifyContent: 'center', alignItems: 'center' }}>
-             <Icon name="eco" size={30} color="#4CAF50" />
+             <Icon name="eco" size={30} color="#ff0000" />
           </View>
           
           {/* Info Column */}
@@ -698,7 +698,7 @@ const MonitorPage = ({ navigation, route }) => {
     if (isLoading && !isRefreshing) {
       return (
         <View style={styles.emptyStateContainer}>
-          <ActivityIndicator size="large" color="#00875A" />
+          <ActivityIndicator size="large" color="#ff0000" />
           <Text style={styles.emptyStateText}>Loading plants...</Text>
         </View>
       );
@@ -719,7 +719,7 @@ const MonitorPage = ({ navigation, route }) => {
     
     return (
       <View style={styles.emptyStateContainer}>
-        <Icon name="solar-power" size={64} color="#00875A" />
+        <Icon name="solar-power" size={64} color="#ff0000" />
         <Text style={styles.emptyStateText}>No plants found</Text>
         <Text style={styles.emptyStateSubText}>Could not retrieve plant list from the server.</Text>
       </View>
@@ -839,7 +839,7 @@ const MonitorPage = ({ navigation, route }) => {
                   setIsRefreshing(true);
                   fetchPlantsAndStats();
                 }}
-                colors={['#00875A']}
+                colors={['#ff0000']}
               />
             }
           />
@@ -990,7 +990,7 @@ const localStyles = StyleSheet.create({
   viewButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#00875A',
+    backgroundColor: '#ff0000',
     padding: 10,
     borderRadius: 4,
     marginRight: 10,
@@ -998,7 +998,7 @@ const localStyles = StyleSheet.create({
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#ff0000',
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 4,
@@ -1017,7 +1017,7 @@ const localStyles = StyleSheet.create({
     fontWeight: '500',
   },
   statusOnline: {
-    color: '#4CAF50',  // Green
+    color: '#ff0000',  // Red
   },
   statusOffline: {
     color: '#F44336',  // Red
