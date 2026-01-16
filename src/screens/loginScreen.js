@@ -1,35 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  ActivityIndicator,
-  Platform,
-  SafeAreaView,
-} from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import BackgroundImage from "../componenst/BackgroundImage";
-import LinkComponent from "../componenst/Links";
-import Button from "../componenst/Button";
-import styles from "../styles/style";
-import apiClient from "../utils/api-native.js";
-import { BackHandler } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAuth } from "../context/AuthContext";
-import { performHardcodedLogin } from "@/utils/services/loginService";
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator, Platform, SafeAreaView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import BackgroundImage from '../componenst/BackgroundImage';
+import LinkComponent from '../componenst/Links';
+import Button from '../componenst/Button';
+import styles from '../styles/style';
+import apiClient from '../utils/api-native.js';
+import { BackHandler } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../context/AuthContext';
+import { performHardcodedLogin } from "@/utils/services/loginService"
 
 // Import Google Sign-In conditionally with error handling
 let GoogleSignin, GoogleSigninButton, statusCodes;
 
 try {
-  const GoogleSignInModule = require("@react-native-google-signin/google-signin");
+  const GoogleSignInModule = require('@react-native-google-signin/google-signin');
   GoogleSignin = GoogleSignInModule.GoogleSignin;
   GoogleSigninButton = GoogleSignInModule.GoogleSigninButton;
   statusCodes = GoogleSignInModule.statusCodes;
 } catch (error) {
-  console.log("Google Sign-In module could not be loaded:", error);
+  console.log('Google Sign-In module could not be loaded:', error);
 }
 
 // Define authService functions using the imported apiClient
@@ -43,8 +34,10 @@ const authService = {
 */
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginVia, setLoginVia] = useState('email');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleSignInAvailable, setIsGoogleSignInAvailable] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
+    setShowPassword(prevState => !prevState);
   };
 
   useEffect(() => {
@@ -76,41 +69,72 @@ const LoginScreen = ({ navigation }) => {
         setIsGoogleSignInAvailable(false);
       }
     };*/
-    // checkGoogleSignIn();
+
+   // checkGoogleSignIn();
   }, []);
 
   const handleLogin = async () => {
+
+    const loginIdentifier = loginVia === 'username' ? username : email;
+
     const result = await performHardcodedLogin({
-      email,
+      email: loginIdentifier,
       password,
       setIsLoading,
-      login,
+      login
     });
+
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <View style={styles.loginContainer}>
         <BackgroundImage />
 
         <View style={styles.loginTopContainer}>
           <View style={styles.loginFormContainer}>
+
+            <View style={{ flexDirection: 'row', marginBottom: 12, gap: 10 }}>
+              <TouchableOpacity
+                onPress={() => setLoginVia('email')}
+                activeOpacity={0.8}
+                style={{
+                  flex: 1,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                  backgroundColor: loginVia === 'email' ? '#ff0000' : '#f1f1f1',
+                }}
+              >
+                <Text style={{ color: loginVia === 'email' ? '#fff' : '#333', fontWeight: '700' }}>Email</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => setLoginVia('username')}
+                activeOpacity={0.8}
+                style={{
+                  flex: 1,
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                  backgroundColor: loginVia === 'username' ? '#ff0000' : '#f1f1f1',
+                }}
+              >
+                <Text style={{ color: loginVia === 'username' ? '#fff' : '#333', fontWeight: '700' }}>Username</Text>
+              </TouchableOpacity>
+            </View>
+
             <View style={styles.inputWithIconContainer}>
               <TextInput
                 style={styles.LoginInputWithInlineIcon}
-                placeholder="Enter your Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
+                placeholder={loginVia === 'username' ? 'Enter your Username' : 'Enter your Email'}
+                value={loginVia === 'username' ? username : email}
+                onChangeText={loginVia === 'username' ? setUsername : setEmail}
+                keyboardType={loginVia === 'username' ? 'default' : 'email-address'}
                 autoCapitalize="none"
                 placeholderTextColor="#999"
               />
-              <Icon
-                name="email"
-                size={20}
-                color="#666"
-                style={styles.inlineInputIcon}
-              />
+              <Icon name={loginVia === 'username' ? 'person' : 'email'} size={20} color="#666" style={styles.inlineInputIcon} />
             </View>
 
             <View style={styles.inputWithIconContainer}>
@@ -124,12 +148,7 @@ const LoginScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
               />
-              <Icon
-                name="lock"
-                size={20}
-                color="#666"
-                style={styles.inlineInputIcon}
-              />
+              <Icon name="lock" size={20} color="#666" style={styles.inlineInputIcon} />
               <TouchableOpacity
                 style={styles.eyeIconContainer}
                 onPress={togglePasswordVisibility}
@@ -145,44 +164,37 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={styles.linkContainer}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPassword")}
-                style={{ width: "100%", alignItems: "flex-end" }}
+                onPress={() => navigation.navigate('ForgotPassword')}
+                style={{ width: '100%', alignItems: 'flex-end' }}
               >
                 <Text style={styles.linkText}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
+           
 
             <View style={styles.loginButtonContainer}>
               {isLoading ? (
-                <ActivityIndicator
-                  size="large"
-                  color="#ff0000"
-                  style={{ marginVertical: 20 }}
-                />
+                <ActivityIndicator size="large" color="#ff0000" style={{ marginVertical: 20 }} />
               ) : (
-                <TouchableOpacity
-                  style={styles.LoginButton}
-                  onPress={handleLogin}
-                >
+                <TouchableOpacity style={styles.LoginButton} onPress={handleLogin}>
                   <Text style={styles.buttonText}>Log In</Text>
                 </TouchableOpacity>
               )}
             </View>
 
-            {}
+
+
+             {}  
             <View style={styles.loginFooterContainer}>
               <View style={styles.registerPromptContainer}>
-                <Text style={styles.registerPromptText}>
-                  Don't have an account?{" "}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Register")}
-                >
+                <Text style={styles.registerPromptText}>Don't have an account? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                   <Text style={styles.registerLinkText}>Sign Up</Text>
                 </TouchableOpacity>
               </View>
+                
             </View>
-            {}
+              {}
           </View>
         </View>
       </View>

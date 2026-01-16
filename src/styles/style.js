@@ -100,7 +100,7 @@ const FONT_FAMILY = Platform.select({
 // Define COLORS if not already defined globally
 const COLORS = {
   primary: '#ff0000',
-  secondary: '#00875A',
+  secondary: '#ff0000',
   // Add other colors used in styles if needed
   white: '#fff',
   lightGrey: '#eee',
@@ -109,7 +109,7 @@ const COLORS = {
   black: '#333',
   error: '#F44336',
   warning: '#FF9800',
-  success: '#4CAF50',
+  success: '#ff0000',
   info: '#2196F3',
   favorite: '#FFC107',
 };
@@ -1876,7 +1876,7 @@ const styles = StyleSheet.create({
   },
   pendingPlantCard: {
     borderLeftWidth: 5,
-    borderLeftColor: '#4CAF50',
+    borderLeftColor: '#ff0000',
   },
   pendingUpdateCard: {
     borderLeftWidth: 5,
@@ -1998,7 +1998,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   cancelButtonText: {
-    color: '#00875A',
+    color: '#ff0000',
     fontSize: 16,
   },
   addPlantHeader: {
@@ -2021,7 +2021,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   addPlantCancelText: {
-    color: '#00875A',
+    color: '#ff0000',
     fontSize: 16,
   },
   addPlantSectionHeader: {
@@ -2476,7 +2476,7 @@ const styles = StyleSheet.create({
     // Keep existing styles for the percentage text
     fontSize: 24,
     fontWeight: 'bold',
-    color: COLORS.primary || '#00875A',
+    color: COLORS.primary || '#ff0000',
   },
   powerIcon: {
     // Optional: Adjust positioning if needed now that it's absolutely positioned

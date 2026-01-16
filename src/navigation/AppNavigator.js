@@ -29,6 +29,12 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'; // <-- Impor
 import VerifyOTPScreen from '../screens/VerifyOTPScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import ProtectParameterScreen from '../screens/ProtectParameterScreen';
+import SettingsScreen from '../screens/SettingsScreen'; // <-- Import Settings screens
+import AccountSecurityScreen from '../screens/AccountSecurityScreen';
+import EditPasswordScreen from '../screens/EditPasswordScreen';
+import EditEmailScreen from '../screens/EditEmailScreen';
+import EditUsernameScreen from '../screens/EditUsernameScreen';
+import BusinessSettingsScreen from '../screens/BusinessSettingsScreen';
 
 // TODO: Import Plant Details, Add Plant screens etc. when created
 
@@ -140,6 +146,13 @@ return (
         <Stack.Screen name="DetailedProductionCharts" component={DetailedProductionChartsScreen} />
         <Stack.Screen name="DeleteAccount" component={DeleteAccountScreen} />
         <Stack.Screen name="ProtectParameterScreen" component={ProtectParameterScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="AccountSecurity" component={AccountSecurityScreen} />
+        <Stack.Screen name="EditPassword" component={EditPasswordScreen} />
+        <Stack.Screen name="EditEmail" component={EditEmailScreen} />
+        <Stack.Screen name="EditUsername" component={EditUsernameScreen} />
+        <Stack.Screen name="BusinessSettings" component={BusinessSettingsScreen} />
+        <Stack.Screen name="TermsAndConditions" component={TermsAndConditionsScreen} />
       </Stack.Group>
     )}
   </Stack.Navigator>

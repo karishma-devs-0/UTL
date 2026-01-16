@@ -21,7 +21,8 @@ const LoggerAppBar = ({
   title, 
   onBackPress, 
   onMenuPress,
-  showMenu = true 
+  showMenu = true,
+  menuIconName = 'more-vert'
 }) => {
   const navigation = useNavigation();
   
@@ -58,7 +59,7 @@ const LoggerAppBar = ({
               style={styles.iconButton}
               hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
             >
-              <Icon name="more-vert" size={24} color={COLORS.textPrimary} />
+              <Icon name={menuIconName || 'more-vert'} size={24} color={COLORS.textPrimary} />
             </TouchableOpacity>
           ) : (
             <View style={styles.iconPlaceholder} />
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
+    paddingTop: Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 0,
   },
   appBar: {
     flexDirection: 'row',

@@ -14,11 +14,6 @@ const AppSettings = ({ navigation }) => {
       rightText: '',
     },
     {
-      title: 'Language',
-      icon: 'language',
-      rightText: 'English',
-    },
-    {
       icon: 'tune',
       rightText: '',
     },

@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Svg, { Circle } from 'react-native-svg';
 import styles from '../styles/style';
 import { COLORS } from '../styles/style';
-import { formatProductionValue } from '../utils/unitConversion';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -36,23 +35,54 @@ const DashboardCircularProgress = ({
   const center = size / 2;
   const circumference = 2 * Math.PI * radius;
 
+  // Helper function to format production values with automatic unit conversion
+  const formatValue = (value, defaultUnit = 'kWh') => {
+    if (!value || value === '--' || isNaN(parseFloat(value))) {
+      return { value: '--', unit: defaultUnit };
+    }
+
+    const numericValue = parseFloat(value);
+
+    // For values >= 1000, convert to next unit up
+    if (numericValue >= 1000) {
+      switch (defaultUnit) {
+        case 'kW':
+          return {
+            value: (numericValue / 1000).toFixed(2),
+            unit: 'kW'
+          };
+        case 'kWh':
+          return {
+            value: (numericValue / 1000).toFixed(2),
+            unit: 'MWh'
+          };
+        default:
+          return {
+            value: numericValue.toFixed(2),
+            unit: defaultUnit
+          };
+      }
+    }
+
+    return {
+      value: numericValue.toFixed(2),
+      unit: defaultUnit
+    };
+  };
+
   useEffect(() => {
     if (dashboardData) {
       try {
-        // Extract values from dashboard data safely - API may return various field names
+        // Extract values from dashboard data safely
         const {
           installed_capacity = 0,
           current_power = 0,
           daily_production = 0,
-          current_day_production = 0,
           monthly_production = 0,
           yearly_production = 0,
           total_production = 0,
           utilization_percentage = 0
         } = dashboardData;
-
-        // Use daily_production if available, otherwise current_day_production
-        const dailyProd = daily_production || current_day_production;
 
         // Calculate percentage based on utilization or current power vs capacity with safety checks
         let calculatedPercentage = 0;
@@ -67,19 +97,24 @@ const DashboardCircularProgress = ({
         
         setTargetPercentage(calculatedPercentage);
 
-        // Format all production values using utility function
-        const stats = {
-          installedCapacity: formatProductionValue(installed_capacity, 'kWp'),
-          currentPower: formatProductionValue(current_power, 'kW'),
-          dailyProduction: formatProductionValue(dailyProd, 'kWh'),
-          monthlyProduction: formatProductionValue(monthly_production, 'kWh'),
-          // API returns yearly_production in kWh; convert appropriately
-          yearlyProduction: formatProductionValue(yearly_production, 'kWh'),
-          // API returns total_production in kWh; convert appropriately
-          totalProduction: formatProductionValue(total_production, 'kWh')
-        };
-        
-        setProductionStats(stats);
+        // Format all production values safely
+        setProductionStats({
+          installedCapacity: { 
+            value: parseFloat(installed_capacity || 0).toFixed(2), 
+            unit: 'kWp' 
+          },
+          currentPower: formatValue(current_power, 'kW'),
+          dailyProduction: formatValue(daily_production, 'kWh'),
+          monthlyProduction: formatValue(monthly_production, 'kWh'),
+          yearlyProduction: { 
+            value: parseFloat(yearly_production || 0).toFixed(2), 
+            unit: 'MWh' 
+          },
+          totalProduction: { 
+            value: parseFloat(total_production || 0).toFixed(2), 
+            unit: 'MWh' 
+          }
+        });
 
         if (animated) {
           Animated.timing(animatedPercentageValue, {

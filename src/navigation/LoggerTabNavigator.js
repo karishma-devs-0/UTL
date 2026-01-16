@@ -22,10 +22,16 @@ const COLORS = {
 };
 
 // --- Reusable Logger Menu Modal (adapted from loggerDetailScreen.js) ---
-const LoggerActionMenuModal = ({ visible, onClose, loggerSno, onDeleteConfirm, isDeleting }) => {
+const LoggerActionMenuModal = ({ visible, onClose, loggerSno, onRemoteControl, onDeleteConfirm, isDeleting }) => {
   const menuOptions = [
-    // { icon: 'system-update-alt', text: 'Firmware Upgrade', onPress: () => { onClose(); Alert.alert("Info", "Firmware Upgrade not implemented."); } },
-    // { icon: 'settings-remote', text: 'Remote Control', onPress: () => { onClose(); Alert.alert("Info", "Remote Control not implemented."); } },
+    {
+      icon: 'settings-remote',
+      text: 'Remote Control',
+      onPress: () => {
+        onClose();
+        if (typeof onRemoteControl === 'function') onRemoteControl();
+      },
+    },
     {
       icon: 'delete-outline',
       text: isDeleting ? 'Deleting...' : 'Delete Logger',
@@ -99,43 +105,14 @@ const LoggerTabNavigator = ({ route, navigation }) => {
   const [isMenuModalVisible, setIsMenuModalVisible] = useState(false);
   const [isDeletingLogger, setIsDeletingLogger] = useState(false);
 
-  // No need to manipulate header options anymore
-  useLayoutEffect(() => {
-    // Configure the navigator to hide the header since we're using our custom AppBar
-    navigation.setOptions({
-      headerShown: false
-    });
-  }, [navigation]);
-
-  // useEffect for fetching the logger details (keep this)
-  useEffect(() => {
-    const fetchLoggerDetails = async () => {
-      if (!loggerId) {
-        setError('Logger S/N not provided for Tab Navigator.');
-        setIsLoading(false); return;
-      }
-      if (!plantId) {
-        setError('Plant ID not provided for Tab Navigator.');
-        setIsLoading(false); return;
-      }
-      setIsLoading(true); setError(null);
-      try {
-        console.log(`[LoggerTabNavigator] Calling getLoggerDetailsBySno with S/N: ${loggerId}, Plant ID: ${plantId}`);
-        const result = await deviceService.getLoggerDetailsBySno(loggerId, plantId);
-        console.log(`[LoggerTabNavigator] Result from getLoggerDetailsBySno:`, JSON.stringify(result, null, 2));
-        if (result.success && result.data) {
-          setInternalLoggerData(result.data);
-        } else {
-          setError(result.error || 'Failed to load logger details in Tab Navigator.');
-        }
-      } catch (e) {
-        console.error(`[LoggerTabNavigator] Error in fetchLoggerDetails:`, e);
-        setError(e.message || 'An unexpected error occurred.');
-      }
-      setIsLoading(false);
-    };
-    fetchLoggerDetails();
-  }, [loggerId, plantId]);
+  const handleRemoteControl = () => {
+    const serialNumber = internalLoggerData?.sno || loggerId;
+    if (!serialNumber) {
+      Alert.alert('Missing Serial Number', 'Serial number is required to send commands.');
+      return;
+    }
+    navigation.navigate('ProtectParameterScreen', { serialNumber });
+  };
 
   const handleDeleteLoggerConfirm = () => {
     if (!internalLoggerData || !internalLoggerData.sno) {
@@ -176,6 +153,44 @@ const LoggerTabNavigator = ({ route, navigation }) => {
       { cancelable: true, onDismiss: () => setIsMenuModalVisible(false) } // Ensure modal closes if alert is dismissed
     );
   };
+
+  // No need to manipulate header options anymore
+  useLayoutEffect(() => {
+    // Configure the navigator to hide the header since we're using our custom AppBar
+    navigation.setOptions({
+      headerShown: false
+    });
+  }, [navigation]);
+
+  // useEffect for fetching the logger details (keep this)
+  useEffect(() => {
+    const fetchLoggerDetails = async () => {
+      if (!loggerId) {
+        setError('Logger S/N not provided for Tab Navigator.');
+        setIsLoading(false); return;
+      }
+      if (!plantId) {
+        setError('Plant ID not provided for Tab Navigator.');
+        setIsLoading(false); return;
+      }
+      setIsLoading(true); setError(null);
+      try {
+        console.log(`[LoggerTabNavigator] Calling getLoggerDetailsBySno with S/N: ${loggerId}, Plant ID: ${plantId}`);
+        const result = await deviceService.getLoggerDetailsBySno(loggerId, plantId);
+        console.log(`[LoggerTabNavigator] Result from getLoggerDetailsBySno:`, JSON.stringify(result, null, 2));
+        if (result.success && result.data) {
+          setInternalLoggerData(result.data);
+        } else {
+          setError(result.error || 'Failed to load logger details in Tab Navigator.');
+        }
+      } catch (e) {
+        console.error(`[LoggerTabNavigator] Error in fetchLoggerDetails:`, e);
+        setError(e.message || 'An unexpected error occurred.');
+      }
+      setIsLoading(false);
+    };
+    fetchLoggerDetails();
+  }, [loggerId, plantId]);
 
   if (isLoading) {
     return (
@@ -279,6 +294,7 @@ const LoggerTabNavigator = ({ route, navigation }) => {
             <LoggerArchitectureScreen
               {...props}
               loggerData={internalLoggerData}
+              plantId={plantId}
               showMenu={true}
               onMenuPress={() => setIsMenuModalVisible(true)}
             />
@@ -290,6 +306,7 @@ const LoggerTabNavigator = ({ route, navigation }) => {
         visible={isMenuModalVisible}
         onClose={() => setIsMenuModalVisible(false)}
         loggerSno={internalLoggerData?.sno}
+        onRemoteControl={handleRemoteControl}
         onDeleteConfirm={handleDeleteLoggerConfirm}
         isDeleting={isDeletingLogger}
       />
